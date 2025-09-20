@@ -17,7 +17,8 @@ export const useBookSearch = () => {
     try {
       const results = await searchBooks(query, searchType);
       setBooks(results);
-    } catch (e) {
+    } catch (error) {
+      console.error('Search failed:', error);
       setError('Failed to fetch books. Please try again.');
     } finally {
       setLoading(false);

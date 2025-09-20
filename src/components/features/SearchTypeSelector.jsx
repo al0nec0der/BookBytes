@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 export default function SearchTypeSelector({ searchType, onSearchTypeChange }) {
   const options = [
     { value: 'title', label: 'Title' },

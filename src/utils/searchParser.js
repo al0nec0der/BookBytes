@@ -85,7 +85,7 @@ export function parseSearchQuery(query) {
  * @param {string} searchType - Type of search (title, author, subject)
  * @returns {string} Formatted query string for Open Library API
  */
-export function buildOpenLibraryQuery(parsedQuery, searchType) {
+export function buildOpenLibraryQuery(parsedQuery) {
   const queryParts = [];
   
   // Add individual terms (implicit AND)

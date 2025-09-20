@@ -1,4 +1,4 @@
-export default function ImagePlaceholder({ alt, className }) {
+export default function ImagePlaceholder({ className }) {
   return (
     <div className={`flex items-center justify-center bg-gradient-to-br from-gray-900 to-black ${className}`}>
       <div className="text-center p-2">
