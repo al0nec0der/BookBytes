@@ -1,8 +1,11 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import ImageWithFallback from './ImageWithFallback';
 import ImagePlaceholder from './ImagePlaceholder';
+import { searchGoogleBooks, getGoogleBooksUrl } from '../../services/googleBooks';
 
 export default function BookDetailModal({ book, onClose }) {
+  const [googleVolume, setGoogleVolume] = useState(null);
+
   // Handle escape key to close modal
   useEffect(() => {
     const handleEsc = (event) => {
@@ -17,10 +20,27 @@ export default function BookDetailModal({ book, onClose }) {
     };
   }, [onClose]);
 
+  // Fetch Google Books data for the book
+  useEffect(() => {
+    const fetchGoogleBooksData = async () => {
+      try {
+        const volume = await searchGoogleBooks(book);
+        setGoogleVolume(volume);
+      } catch (error) {
+        console.error('Error fetching Google Books data:', error);
+      }
+    };
+    
+    fetchGoogleBooksData();
+  }, [book]);
+
   // Use the largest available cover size
   const coverUrl = book.coverId
     ? `https://covers.openlibrary.org/b/id/${book.coverId}-L.jpg`
     : null;
+    
+  // Construct Google Books URL
+  const googleBooksUrl = getGoogleBooksUrl(book, googleVolume);
 
   return (
     <div 
@@ -53,6 +73,7 @@ export default function BookDetailModal({ book, onClose }) {
                   alt={`Cover of ${book.title}`}
                   className="w-full h-full rounded-lg shadow-lg object-cover"
                   fallbackComponent={<ImagePlaceholder className="w-full h-full rounded-lg shadow-lg" />}
+                  book={book}
                 />
               </div>
             </div>
@@ -81,6 +102,34 @@ export default function BookDetailModal({ book, onClose }) {
                     <p className="text-gray-200">{book.publisher}</p>
                   </div>
                 )}
+                
+                {book.isbn13 && (
+                  <div>
+                    <h4 className="text-sm font-semibold text-gray-400 uppercase tracking-wider">ISBN-13</h4>
+                    <p className="text-gray-200">{book.isbn13}</p>
+                  </div>
+                )}
+                
+                {book.isbn10 && (
+                  <div>
+                    <h4 className="text-sm font-semibold text-gray-400 uppercase tracking-wider">ISBN-10</h4>
+                    <p className="text-gray-200">{book.isbn10}</p>
+                  </div>
+                )}
+              </div>
+              
+              <div className="mt-6">
+                <a
+                  href={googleBooksUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-black focus:ring-blue-500"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-8 14H7v-2h4v2zm0-3H7v-2h4v2zm0-3H7V9h4v2zm6 6h-4V9h4v8zm0-10h-4V7h4v2z"/>
+                  </svg>
+                  View on Google Books
+                </a>
               </div>
             </div>
           </div>

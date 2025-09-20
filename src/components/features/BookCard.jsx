@@ -25,6 +25,7 @@ export default function BookCard({ book, onClick }) {
           alt={`Cover of ${book.title}`}
           className="object-cover w-full h-full"
           fallbackComponent={<ImagePlaceholder className="w-full h-full" />}
+          book={book}
         />
       </div>
       <div className="p-2 flex flex-col flex-grow">
