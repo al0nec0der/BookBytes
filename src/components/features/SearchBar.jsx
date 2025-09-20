@@ -11,15 +11,19 @@ export default function SearchBar({ onSearch }) {
   };
   
   return (
-    <form onSubmit={handleSubmit} className="flex items-center gap-2">
-      <Input 
-        type="text" 
-        placeholder="e.g., The Lord of the Rings" 
-        required 
-        value={query} 
-        onChange={(e) => setQuery(e.target.value)} 
-      />
-      <Button type="submit">Search</Button>
+    <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row items-center gap-3 w-full max-w-2xl mx-auto">
+      <div className="w-full">
+        <Input 
+          type="text" 
+          placeholder="e.g., The Lord of the Rings" 
+          required 
+          value={query} 
+          onChange={(e) => setQuery(e.target.value)} 
+        />
+      </div>
+      <div className="w-full sm:w-auto">
+        <Button type="submit" className="w-full sm:w-auto">Search</Button>
+      </div>
     </form>
   );
 }
