@@ -15,7 +15,7 @@ export default function SearchBar({ onSearch }) {
   
   return (
     <div className="w-full">
-      <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row items-center gap-4 w-full max-w-3xl mx-auto">
+      <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row items-center gap-5 w-full max-w-4xl mx-auto">
         <div className="w-full">
           <Input 
             type="text" 
@@ -35,7 +35,7 @@ export default function SearchBar({ onSearch }) {
             searchType={searchType} 
             onSearchTypeChange={setSearchType} 
           />
-          <Button type="submit" className="w-full sm:w-auto text-lg py-3.5">Search</Button>
+          <Button type="submit" className="w-full sm:w-auto text-lg px-8 py-4">Search</Button>
         </div>
       </form>
       <SearchTips />
