@@ -13,7 +13,7 @@ export default function SearchBar({ onSearch }) {
   };
   
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row items-center gap-3 w-full max-w-2xl mx-auto">
+    <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row items-center gap-4 w-full max-w-3xl mx-auto">
       <div className="w-full">
         <Input 
           type="text" 
@@ -25,14 +25,15 @@ export default function SearchBar({ onSearch }) {
           required 
           value={query} 
           onChange={(e) => setQuery(e.target.value)} 
+          className="text-lg"
         />
       </div>
-      <div className="w-full sm:w-auto flex flex-col sm:flex-row gap-2">
+      <div className="w-full sm:w-auto flex flex-col sm:flex-row gap-3">
         <SearchTypeSelector 
           searchType={searchType} 
           onSearchTypeChange={setSearchType} 
         />
-        <Button type="submit" className="w-full sm:w-auto">Search</Button>
+        <Button type="submit" className="w-full sm:w-auto text-lg py-3.5">Search</Button>
       </div>
     </form>
   );
