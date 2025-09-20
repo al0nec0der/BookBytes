@@ -1,39 +1,43 @@
 import { useState } from 'react';
-import { getSearchTips } from "../utils/searchParser";
+import { getSearchTips, getBooleanExamples } from "../utils/searchParser";
 
 export default function SearchTips() {
   const [isOpen, setIsOpen] = useState(false);
   const tips = getSearchTips();
+  const booleanExamples = getBooleanExamples();
 
   return (
-    <div className="mt-4 w-full max-w-3xl mx-auto">
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center text-gray-400 hover:text-blue-400 transition-colors duration-200"
-      >
-        <svg 
-          xmlns="http://www.w3.org/2000/svg" 
-          className="h-5 w-5 mr-2"
-          fill="none" 
-          viewBox="0 0 24 24" 
-          stroke="currentColor"
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-        <span className="text-sm font-medium">Search Tips & Advanced Operators</span>
-        <svg 
-          xmlns="http://www.w3.org/2000/svg" 
-          className={`h-4 w-4 ml-2 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
-          fill="none" 
-          viewBox="0 0 24 24" 
-          stroke="currentColor"
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-        </svg>
-      </button>
-      
+    <div className="mt-4 w-full max-w-4xl mx-auto">
+      {/* Quick Boolean Examples - Always visible */}
+      <div className="mb-4 p-4 bg-gradient-to-r from-gray-900 to-black rounded-xl border border-gray-800 shadow-lg">
+        <div className="flex flex-wrap items-center gap-2">
+          <span className="text-gray-400 text-sm font-medium">Examples:</span>
+          {booleanExamples.map((example, index) => (
+            <code key={index} className="px-2 py-1 bg-gray-800 text-blue-300 rounded text-xs font-mono">
+              {example}
+            </code>
+          ))}
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="text-gray-400 hover:text-blue-400 text-sm font-medium transition-colors duration-200 ml-auto flex items-center"
+          >
+            {isOpen ? 'Hide Details' : 'Show All Tips'}
+            <svg 
+              xmlns="http://www.w3.org/2000/svg" 
+              className={`h-4 w-4 ml-1 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
+              fill="none" 
+              viewBox="0 0 24 24" 
+              stroke="currentColor"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      {/* Detailed Search Tips - Toggleable */}
       {isOpen && (
-        <div className="mt-3 bg-gradient-to-br from-gray-900 to-black rounded-xl p-5 border border-gray-800 shadow-xl">
+        <div className="bg-gradient-to-br from-gray-900 to-black rounded-xl p-5 border border-gray-800 shadow-xl">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {tips.map((tip, index) => (
               <div key={index} className="border border-gray-800 rounded-lg p-4 bg-gray-900/50">
