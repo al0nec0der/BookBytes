@@ -1,8 +1,20 @@
+import { useState } from 'react';
 import BookList from "../features/BookList";
 import LoadingSpinner from "../ui/LoadingSpinner";
 import ErrorMessage from "../ui/ErrorMessage";
+import BookDetailModal from "../ui/BookDetailModal";
 
 export default function ResultsContainer({ books, loading, error, hasSearched, onRetry }) {
+  const [selectedBook, setSelectedBook] = useState(null);
+
+  const handleBookClick = (book) => {
+    setSelectedBook(book);
+  };
+
+  const closeModal = () => {
+    setSelectedBook(null);
+  };
+
   if (loading) {
     return <LoadingSpinner />;
   }
@@ -34,7 +46,14 @@ export default function ResultsContainer({ books, loading, error, hasSearched, o
   }
 
   if (books.length > 0) {
-    return <BookList books={books} />;
+    return (
+      <>
+        <BookList books={books} onBookClick={handleBookClick} />
+        {selectedBook && (
+          <BookDetailModal book={selectedBook} onClose={closeModal} />
+        )}
+      </>
+    );
   }
 
   return null;
