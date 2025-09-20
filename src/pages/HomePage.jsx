@@ -16,7 +16,7 @@ export default function HomePage() {
         loading={loading} 
         error={error} 
         hasSearched={hasSearched} 
-        onRetry={() => performSearch(document.querySelector('input')?.value || '')}
+        onRetry={() => performSearch(document.querySelector('input')?.value || '', 'title')}
       />
     </Container>
   );

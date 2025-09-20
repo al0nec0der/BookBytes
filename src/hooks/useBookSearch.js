@@ -7,7 +7,7 @@ export const useBookSearch = () => {
   const [error, setError] = useState(null);
   const [hasSearched, setHasSearched] = useState(false);
 
-  const performSearch = useCallback(async (query) => {
+  const performSearch = useCallback(async (query, searchType = 'title') => {
     if (!query) return;
     
     setLoading(true);
@@ -15,7 +15,7 @@ export const useBookSearch = () => {
     setHasSearched(true);
     
     try {
-      const results = await searchBooks(query);
+      const results = await searchBooks(query, searchType);
       setBooks(results);
     } catch (e) {
       setError('Failed to fetch books. Please try again.');

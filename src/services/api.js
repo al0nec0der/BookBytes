@@ -1,9 +1,23 @@
-export const searchBooks = async (query) => {
+export const searchBooks = async (query, searchType = 'title') => {
   if (!query) return [];
   
   const url = new URL('https://openlibrary.org/search.json');
-  url.searchParams.append('title', query);
-  url.searchParams.append('limit', '12');
+  
+  // Dynamically set the search parameter based on searchType
+  switch (searchType) {
+    case 'author':
+      url.searchParams.append('author', query);
+      break;
+    case 'subject':
+      url.searchParams.append('subject', query);
+      break;
+    case 'title':
+    default:
+      url.searchParams.append('title', query);
+      break;
+  }
+  
+  url.searchParams.append('limit', '20'); // Increase limit for more results
   url.searchParams.append('fields', 'key,title,author_name,cover_i,first_publish_year,publisher');
   
   try {

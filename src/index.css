@@ -2,14 +2,14 @@
 
 @layer base {
   body {
-    @apply bg-gray-900 text-gray-200;
+    @apply bg-black text-gray-200;
   }
   
   /* Custom focus styles for better accessibility */
   button:focus-visible,
   input:focus-visible,
   a:focus-visible {
-    @apply outline-none ring-2 ring-blue-500 ring-offset-2 ring-offset-gray-900;
+    @apply outline-none ring-2 ring-blue-500 ring-offset-2 ring-offset-black;
   }
 }
 
