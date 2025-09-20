@@ -7,7 +7,7 @@
 
 
 
-**Live Demo:** [**BookBytes Search Tool**](https://bookbytes-search.vercel.app/)
+**Live Demo:** [**BookBytes Search Tool**](https://bookbytes-eta.vercel.app/)
 
 BookBytes is a high-performance book search application designed for users who need precise and powerful search capabilities. Moving beyond simple keyword matching, this tool implements a custom search parser that supports **Boolean logic**, **exact phrases**, and **wildcard characters**, mirroring the functionality of professional academic databases. It intelligently fetches data from the **Open Library API** and uses the **Google Books API** as a fallback for enhanced data accuracy and cover art availability.
 
@@ -116,3 +116,4 @@ This project is licensed under the MIT License. See the `LICENSE` file for more 
 
 [![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/al0nec0der)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/codewithteja)
+
