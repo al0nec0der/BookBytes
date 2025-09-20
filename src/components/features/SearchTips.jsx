@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { getSearchTips } from '../utils/searchParser';
+import { getSearchTips } from "../utils/searchParser";
 
 export default function SearchTips() {
   const [isOpen, setIsOpen] = useState(false);
