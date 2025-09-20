@@ -5,12 +5,14 @@ export const useBookSearch = () => {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [hasSearched, setHasSearched] = useState(false);
 
   const performSearch = useCallback(async (query) => {
     if (!query) return;
     
     setLoading(true);
     setError(null);
+    setHasSearched(true);
     
     try {
       const results = await searchBooks(query);
@@ -22,5 +24,5 @@ export const useBookSearch = () => {
     }
   }, []);
 
-  return { books, loading, error, performSearch };
+  return { books, loading, error, hasSearched, performSearch };
 };
