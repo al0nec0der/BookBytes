@@ -1,8 +1,10 @@
+import ImageWithFallback from "../ui/ImageWithFallback";
+import ImagePlaceholder from "../ui/ImagePlaceholder";
+
 export default function BookCard({ book, onClick }) {
-  // Use the medium size cover for the card
   const coverUrl = book.coverId
     ? `https://covers.openlibrary.org/b/id/${book.coverId}-M.jpg`
-    : "https://via.placeholder.com/128x192.png?text=No+Cover";
+    : null;
 
   return (
     <li 
@@ -10,11 +12,11 @@ export default function BookCard({ book, onClick }) {
       onClick={() => onClick(book)}
     >
       <div className="aspect-w-8 aspect-h-12 w-full relative">
-        <img
+        <ImageWithFallback
           src={coverUrl}
           alt={`Cover of ${book.title}`}
           className="object-cover w-full h-full"
-          loading="lazy"
+          fallbackComponent={<ImagePlaceholder className="w-full h-full" />}
         />
         <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-300 flex items-center justify-center">
           <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">

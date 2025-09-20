@@ -1,4 +1,6 @@
 import { useEffect } from 'react';
+import ImageWithFallback from './ImageWithFallback';
+import ImagePlaceholder from './ImagePlaceholder';
 
 export default function BookDetailModal({ book, onClose }) {
   // Handle escape key to close modal
@@ -18,7 +20,7 @@ export default function BookDetailModal({ book, onClose }) {
   // Use the largest available cover size
   const coverUrl = book.coverId
     ? `https://covers.openlibrary.org/b/id/${book.coverId}-L.jpg`
-    : "https://via.placeholder.com/300x450.png?text=No+Cover+Available";
+    : null;
 
   return (
     <div 
@@ -45,10 +47,11 @@ export default function BookDetailModal({ book, onClose }) {
           
           <div className="flex flex-col md:flex-row gap-6">
             <div className="md:w-1/3">
-              <img
+              <ImageWithFallback
                 src={coverUrl}
                 alt={`Cover of ${book.title}`}
-                className="w-full rounded-lg shadow-lg"
+                className="w-full rounded-lg shadow-lg object-cover"
+                fallbackComponent={<ImagePlaceholder className="w-full rounded-lg shadow-lg aspect-[2/3]" />}
               />
             </div>
             
