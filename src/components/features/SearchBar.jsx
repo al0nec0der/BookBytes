@@ -22,7 +22,7 @@ export default function SearchBar({ onSearch }) {
             placeholder={
               searchType === 'author' ? "e.g., J.K. Rowling OR Stephen King" :
               searchType === 'subject' ? "e.g., Fantasy AND Adventure" :
-              "e.g., \"The Lord of the Rings\" NOT movies"
+              'e.g., "The Lord of the Rings" NOT movies'
             }
             required 
             value={query} 
