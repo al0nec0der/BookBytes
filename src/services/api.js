@@ -1,19 +1,27 @@
+import { parseSearchQuery, buildOpenLibraryQuery } from '../utils/searchParser';
+
 export const searchBooks = async (query, searchType = 'title') => {
   if (!query) return [];
   
   const url = new URL('https://openlibrary.org/search.json');
   
-  // Dynamically set the search parameter based on searchType
+  // Parse the search query
+  const parsedQuery = parseSearchQuery(query);
+  
+  // Build Open Library query string
+  const openLibraryQuery = buildOpenLibraryQuery(parsedQuery);
+  
+  // Set the appropriate search parameter based on searchType
   switch (searchType) {
     case 'author':
-      url.searchParams.append('author', query);
+      url.searchParams.append('author', openLibraryQuery);
       break;
     case 'subject':
-      url.searchParams.append('subject', query);
+      url.searchParams.append('subject', openLibraryQuery);
       break;
     case 'title':
     default:
-      url.searchParams.append('title', query);
+      url.searchParams.append('title', openLibraryQuery);
       break;
   }
   
