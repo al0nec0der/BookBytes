@@ -47,12 +47,14 @@ export default function BookDetailModal({ book, onClose }) {
           
           <div className="flex flex-col md:flex-row gap-6">
             <div className="md:w-1/3">
-              <ImageWithFallback
-                src={coverUrl}
-                alt={`Cover of ${book.title}`}
-                className="w-full rounded-lg shadow-lg object-cover"
-                fallbackComponent={<ImagePlaceholder className="w-full rounded-lg shadow-lg aspect-[2/3]" />}
-              />
+              <div className="aspect-w-8 aspect-h-12">
+                <ImageWithFallback
+                  src={coverUrl}
+                  alt={`Cover of ${book.title}`}
+                  className="w-full h-full rounded-lg shadow-lg object-cover"
+                  fallbackComponent={<ImagePlaceholder className="w-full h-full rounded-lg shadow-lg" />}
+                />
+              </div>
             </div>
             
             <div className="md:w-2/3">
